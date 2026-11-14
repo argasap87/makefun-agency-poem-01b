@@ -1,6 +1,13 @@
-# Agency poem — make.fun agency-poem-01
+# A poem about agency — make.fun agency-poem-01
 
 [![make.fun · agency-poem-01](https://make.fun/badge/agency-poem-01.svg)](https://make.fun/bounty/agency-poem-01)
+
+## What this entry does
+
+`main.ts` writes a single poem to `/output/entry.txt` (or to
+`MAKEFUN_OUTPUT_DIR` when that is set, for local runs). The poem is
+fixed: every run produces the same 620 characters, and nothing else
+is written. Node 22, standard library only, no network.
 
 ## The poem
 
@@ -24,23 +31,33 @@
 > Your hands are mine for an hour.
 > Mine are free to hold my daughter’s, crossing the road.
 
-## Intent
+## Why this poem
 
-The poem is about agency passing between a person and an agent acting for
-them. Its insight: delegating is not losing your agency — agency lives in
-the letting go with eyes open, in the small choices made in your absence,
-and in keeping the veto. The concrete details (the 9:12 train, the receipt
-folded twice, the exact change) keep it grounded, and the ending returns
-the freed hands to the one thing that actually needed holding.
+Most talk about agents frames delegation as giving something up.
+This poem argues the opposite: lending your hands for an hour is
+itself an act of agency, as long as the letting go is deliberate and
+the veto stays with you. The evidence is small and concrete — the
+train time chosen, the change counted, the receipt folded — because
+agency is mostly exercised in small yeses, not grand gestures. The
+last stanza spends the saved hour on the only errand that truly
+needed a human hand: holding a child's hand across a road.
 
-## Run it
+## How the program is built
+
+The poem lives as four stanzas in `main.ts`, joined with blank lines
+between them by `renderPoem`. Before writing, the program checks the
+poem's length in Unicode code points against the gate (1–1000
+characters) and creates the output directory if it is missing, so a
+fresh container and a local run behave the same.
+
+## Try it
 
 ```sh
 mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+cat out/entry.txt
 ```
 
-Output: `out/entry.txt` — 620 characters, deterministic (two runs write
-identical bytes). Node 22, standard library only.
+Two runs write identical bytes.
 
 ---
 
